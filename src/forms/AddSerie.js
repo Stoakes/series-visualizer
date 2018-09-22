@@ -1,34 +1,54 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field, reduxForm } from 'redux-form';
+import { Field, FieldArray, reduxForm } from 'redux-form';
 import { Row, Col, Button } from 'react-bootstrap';
 
 import { TextareaInput } from './TextareaInput.js';
+
+const SerieField = ({ fields }) => {
+    return (
+        <div>
+            <Button
+                bsStyle="primary"
+                className="btn-fill"
+                type="button"
+                onClick={() => fields.push('')}
+            >
+                Add Serie
+            </Button>
+            <br />
+            {fields.map((serie, index) => {
+                return (
+                    <Col md={4} sm={4} xs={12} key={index}>
+                        <Button
+                            bsStyle="danger"
+                            type="button"
+                            onClick={() => fields.remove(index)}
+                            className="pull-right"
+                        >
+                            Remove
+                        </Button>
+                        <label>Serie {index}</label>
+                        <br />
+                        <Field
+                            name={`${serie}`}
+                            id={`${serie}`}
+                            component={TextareaInput}
+                            placeholder="JSON content"
+                            rows={12}
+                        />
+                    </Col>
+                );
+            })}
+        </div>
+    );
+};
 
 let AddSerie = props => {
     return (
         <form onSubmit={props.handleSubmit(props.onSubmit)}>
             <Row>
-                <Col md={4} sm={4} xs={12}>
-                    <Field
-                        name="serieA"
-                        id="serieA"
-                        component={TextareaInput}
-                        label="Serie A"
-                        placeholder="A Json serie"
-                        rows={12}
-                    />
-                </Col>
-                <Col md={4} sm={4} xs={12}>
-                    <Field
-                        name="serieB"
-                        id="serieB"
-                        component={TextareaInput}
-                        label="Serie B"
-                        placeholder="A second Json serie"
-                        rows={12}
-                    />
-                </Col>
+                <FieldArray name="series" component={SerieField} />
                 <Col md={4} sm={4} xs={12}>
                     <label>Example</label>
                     <pre>
@@ -48,7 +68,7 @@ let AddSerie = props => {
             </Row>
             <br />
             <Button bsStyle="success" className="btn-fill" type="submit">
-                Update Series
+                Draw Series
             </Button>
         </form>
     );
