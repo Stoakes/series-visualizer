@@ -16,13 +16,39 @@ let AddSerie = props => {
                         component={TextareaInput}
                         label="Serie A"
                         placeholder="A Json serie"
-                        rows={7}
+                        rows={12}
                     />
+                </Col>
+                <Col md={4} sm={4} xs={12}>
+                    <Field
+                        name="serieB"
+                        id="serieB"
+                        component={TextareaInput}
+                        label="Serie B"
+                        placeholder="A second Json serie"
+                        rows={12}
+                    />
+                </Col>
+                <Col md={4} sm={4} xs={12}>
+                    <label>Example</label>
+                    <pre>
+                        {JSON.stringify(
+                            {
+                                name: 'fuel',
+                                data: [
+                                    { timestamp: 1537592706, value: 10 },
+                                    { timestamp: 1538592706, value: 20 },
+                                ],
+                            },
+                            null,
+                            2
+                        )}
+                    </pre>
                 </Col>
             </Row>
             <br />
             <Button bsStyle="success" className="btn-fill" type="submit">
-                Add Series
+                Update Series
             </Button>
         </form>
     );
