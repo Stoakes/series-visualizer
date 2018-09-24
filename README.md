@@ -10,7 +10,10 @@ Assuming NodeJs and YarnPkg are installed.
 git clone https://github.com/Stoakes/series-visualizer.git
 cd series-visualizer
 yarn install
-yarn start
+yarn build
+# Check `npm bin` folder is in your PATH
+npm install -g serve
+serve -s build
 ```
 
 ## Usage
